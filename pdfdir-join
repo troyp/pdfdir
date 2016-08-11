@@ -201,9 +201,15 @@ done < "$pathfile" | $ghostscript -sDEVICE=pdfwrite -sOUTPUTFILE="$outbase".noma
 if [ -f "$streamfile" ]; then
 	echo
 	echo "Applying bookmarks..."
-	cat "$streamfile" | tokenize_stream | extract_marks | format_markfile > "$outbase".marks
-	$ghostscript -dBATCH -dNOPAUSE -sDEVICE=pdfwrite -sOutputFile="$outbase".pdf "$outbase".nomarks.pdf "$outbase".marks
-	rm "$streamfile" "$outbase".marks
+  # --- gs bookmarks ---
+	# cat "$streamfile" | tokenize_stream | extract_marks | format_markfile > "$outbase".marks
+	# $ghostscript -dBATCH -dNOPAUSE -sDEVICE=pdfwrite -sOutputFile="$outbase".pdf "$outbase".nomarks.pdf "$outbase".marks
+	# rm "$streamfile" "$outbase".marks
+  # --- jpdfbookmarks bookmarks ---
+  jpdfbookmarks "$outbase".nomarks.pdf --apply "$markfile" --out "$outbase".pdf
+	# jpdfbookmarks --apply "$outbase".nomarks.pdf "$markfile" "$outbase".pdf
+	rm "$markfile"
+  # --- end bookmarks ---
 	echo
 	echo "PDF saved to $outbase".pdf
 	echo
