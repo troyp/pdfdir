@@ -206,9 +206,9 @@ if [ -f "$streamfile" ]; then
 	# $ghostscript -dBATCH -dNOPAUSE -sDEVICE=pdfwrite -sOutputFile="$outbase".pdf "$outbase".nomarks.pdf "$outbase".marks
 	# rm "$streamfile" "$outbase".marks
   # --- jpdfbookmarks bookmarks ---
-  jpdfbookmarks "$outbase".nomarks.pdf --apply "$markfile" --out "$outbase".pdf
-	# jpdfbookmarks --apply "$outbase".nomarks.pdf "$markfile" "$outbase".pdf
-	rm "$markfile"
+  jpdfbookmarks "$outbase".nomarks.pdf --apply "$streamfile" --out "$outbase".pdf
+	# jpdfbookmarks --apply "$outbase".nomarks.pdf "$streamfile" "$outbase".pdf
+	rm "$streamfile"
   # --- end bookmarks ---
 	echo
 	echo "PDF saved to $outbase".pdf
